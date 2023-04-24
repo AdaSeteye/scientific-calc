@@ -13,9 +13,9 @@
   </head>
   <body>
     <div class="container">
-      <h1 class="text-center mt-3">scientific calculator</h1>
+      <h1 class="text-center mt-3">Scientific Calculator</h1>
       <div class="row">
-        <div class="col-12 offset-md-3 col-md-6">
+        <div class="col-12">
           <div class="card">
             <div class="card-body">
               <input
@@ -28,16 +28,14 @@
               <div class="row gx-1">
                 <div class="col-md-6">
               <div class="row gx-1 d-none d-md-flex" id="row2" >
-                <div class="col-3 col-md-4">
+                <div class="col-6 col-md-8 d-flex">
                   <button type="button" class="btn btn-light w-100 border mt-2 bg-secondary text-nowrap">
-                    Rad
+                    <span class="text-left">Rad</span>
+                    <span class="text-center">|</span>
+                    <span class="text-right">Deg</span>
                   </button>
                 </div>
-                <div class="col-3 col-md-4">
-                  <button type="button" class="btn btn-light w-100 border mt-2 bg-secondary text-nowrap">
-                    Deg
-                  </button>
-                </div>
+                
                 <div class="col-3 col-md-4">
                   <button type="button" class="btn btn-light w-100 border mt-2 bg-secondary">
                     x!
@@ -117,7 +115,7 @@
             </div>
 
               <div class="col-md-6">
-              <div class="row gx-1" id="row1">
+              <div class="row gx-1 d-md-flex" id="row1">
                 <div class="col-3">
                   <button type="button" class="btn btn-light w-100 border mt-2 bg-secondary">
                     (
