@@ -7,9 +7,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
     currentValue = "";
 
 
+
+    
   var ans = 0
     function findFactorial(n){
-      if (n === 0 || n === 1) {
+      if (n <= 1) {
         return 1;
       } else {
         return n * findFactorial(n-1);
@@ -18,35 +20,39 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
     function factorialHandler(){
       const tempString = display.value
-      tempString.pop
-      const tempValue = parseInt(tempString)
+      const slicedString = tempString.slice(0, -1)
+      const tempValue = parseInt(slicedString)
       return tempValue
     }
 
     function evaluateResult() {
-      const valueToBeevaluated = currentValue
-        .replace("×", "*")
-        .replace("÷", "/")
-        .replace("%", "*0.01")
-        .replace('sin', 'Math.sin')
-        .replace('tan', 'Math.tan')
-        .replace('cos', 'Math.cos')
-        .replace('log', 'Math.log10')
-        .replace('ln', 'Math.log')
-        .replace('π', 'Math.PI')
-        .replace('e', 'Math.E')
-        .replace('sin-1', 'asin')
-        .replace('cos-1', 'acos')
-        .replace('10^', '10**')
-        .replace('tan-1', 'Math.atan')
-        .replace('x^2', '**2')
-        .replace('√', 'Math.sqrt')
-        .replace("^", "**");
-
-        if(valueToBeevaluated.indexOf('!') !== -1){
-          valueToBeevaluated.replace('!', findFactorial(factorialHandler()).toString());
-
-        }
+      let replacedValue = ''
+      if(currentValue.indexOf('!') !== -1){
+         replacedValue = currentValue.replaceAll('!', findFactorial(factorialHandler()).toString())
+      }
+      else{
+         replacedValue = currentValue
+      }
+      const valueToBeevaluated = replacedValue
+        .replaceAll("×", "*")
+        .replaceAll("÷", "/")
+        .replaceAll("%", "*0.01")
+        .replaceAll('sin', 'Math.sin')
+        .replaceAll('tan', 'Math.tan')
+        .replaceAll('cos', 'Math.cos')
+        .replaceAll('log', 'Math.log10')
+        .replaceAll('ln', 'Math.log')
+        .replaceAll('π', 'Math.PI')
+        .replaceAll('e', 'Math.E')
+        .replaceAll('sin-1', 'asin')
+        .replaceAll('cos-1', 'acos')
+        .replaceAll('10^', '10**')
+        .replaceAll('tan-1', 'Math.atan')
+        .replaceAll('x^2', '**2')
+        .replaceAll("^", "**")
+        // .replaceAll(/([0-9]*)y√x([0-9]+)/, "Math.pow($1, 1/$2)")
+        .replaceAll('√', 'Math.sqrt')
+        
 
       
       
@@ -63,7 +69,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
       const button = buttons[i];
       button.addEventListener("click", function () {
 
-        try{
+        // try{
         if (button.innerText == "AC") {
           currentValue = "";
           display.value = currentValue;
@@ -117,7 +123,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
           display.value = currentValue;
         }
         else if(button.innerText == 'y√x'){
-          currentValue += ''
+          currentValue += 'y√x'
           display.value = currentValue;
         }
         else if(button.innerText == 'Rad | Deg' || button.innerText == 'EXP'){
@@ -128,10 +134,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
           currentValue += button.innerText;
           display.value = currentValue;
         }
-    } catch(error){
-        currentValue = "ERROR"
-        display.value = currentValue
-    } 
+    // } catch(error){
+    //     currentValue = "ERROR"
+    //     display.value = currentValue
+    // } 
       });
     }
   });
