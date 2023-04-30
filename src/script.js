@@ -8,7 +8,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-    
   var ans = 0
     function findFactorial(n){
       if (n <= 1) {
@@ -24,7 +23,16 @@ document.addEventListener("DOMContentLoaded", function (event) {
       const tempValue = parseInt(slicedString)
       return tempValue
     }
+    // function calculate(angle) {
+    //   if (!isRadians) {
 
+    //     // Perform calculation with radians
+    //   } else {
+    //     // Convert degrees to radians and perform calculation
+    //     var radians = angle * Math.PI / 180;
+    //     // Perform calculation with radians
+    //   }
+    // }
     function evaluateResult() {
       let replacedValue = ''
       if(currentValue.indexOf('!') !== -1){
@@ -33,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
       else{
          replacedValue = currentValue
       }
-      const valueToBeevaluated = replacedValue
+      let valueToBeevaluated = replacedValue
         .replaceAll("×", "*")
         .replaceAll("÷", "/")
         .replaceAll("%", "*0.01")
@@ -47,24 +55,63 @@ document.addEventListener("DOMContentLoaded", function (event) {
         .replaceAll('sin-1', 'asin')
         .replaceAll('cos-1', 'acos')
         .replaceAll('10^', '10**')
-        .replaceAll('tan-1', 'Math.atan')
+        .replaceAll('tan-1', 'atan')
         .replaceAll('x^2', '**2')
         .replaceAll("^", "**")
-        // .replaceAll(/([0-9]*)y√x([0-9]+)/, "Math.pow($1, 1/$2)")
+        .replaceAll(/([0-9]*)y√x([0-9]+)/g, "Math.pow($2, 1/$1)")
+        .replaceAll(/([0-9]*)EXP([0-9]+)/g, "$1*Math.pow(10, $2)")
         .replaceAll('√', 'Math.sqrt')
         
 
       
       
-      
+        if (!isRadians) {
+          valueToBeevaluated = valueToBeevaluated.replaceAll(/\bsin\((\d+)\)/g, "sin($1*π/180)")
+          .replaceAll(/\bcos\((\d+)\)/g, "cos($1*π/180)")
+          .replaceAll(/\btan\((\d+)\)/g, "tan($1*π/180)")
+          .replaceAll(/Math\.asin\((\d+\.\d+)\)/g, "57.3 * Math.asin($1)")
+          .replaceAll(/Math\.acos\((\d+\.\d+)\)/g, "57.3 * Math.acos($1)")
+          .replaceAll(/Math\.atan\((\d+\.\d+)\)/g, "57.3 * Math.atan($1)")
+          .replaceAll('π', 'Math.PI')
+
+        }
+
+            console.log(isRadians)
+           console.log(valueToBeevaluated)
 
       const result = eval(valueToBeevaluated);
       currentValue = result.toString();
+      
       display.value = currentValue;
 
       ans = currentValue;
     }
+
+
     var counter = 0
+    var isRadians = true;
+
+
+    function radDeg(){
+      if (isRadians) {
+        $("#btn-rad").addClass("active");
+      } 
+      else {
+        $("#btn-deg").addClass("active");
+      }
+      $("#btn-rad").click(function() {
+        isRadians = true;
+        $("#btn-deg").removeClass("active");
+        $("#btn-rad").addClass("active");
+      });
+      $("#btn-deg").click(function() {
+        isRadians = false;
+        $("#btn-rad").removeClass("active");
+        $("#btn-deg").addClass("active");
+      });
+    }
+    
+
     for (let i = 0; i < buttons.length; i++) {
       const button = buttons[i];
       button.addEventListener("click", function () {
@@ -122,18 +169,21 @@ document.addEventListener("DOMContentLoaded", function (event) {
           currentValue += '^'
           display.value = currentValue;
         }
-        else if(button.innerText == 'y√x'){
-          currentValue += 'y√x'
+        else if(button.innerText == 'x^2'){
+          currentValue += '^2'
           display.value = currentValue;
         }
-        else if(button.innerText == 'Rad | Deg' || button.innerText == 'EXP'){
-          currentValue += ''
-          display.value = currentValue;
+      
+        else if(button.innerText == 'Rad' || button.innerText == 'Deg'){
+            radDeg()
+   
         }
         else {
           currentValue += button.innerText;
           display.value = currentValue;
         }
+
+        
     // } catch(error){
     //     currentValue = "ERROR"
     //     display.value = currentValue

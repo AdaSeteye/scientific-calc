@@ -28,12 +28,16 @@
               <div class="row gx-1">
                 <div class="col-md-6">
               <div class="row gx-1 d-none d-md-flex" id="row2" >
-                <div class="col-6 col-md-8 d-flex">
-                  <button type="button" class="btn btn-light w-100 border mt-2 text-nowrap">
+                <div class="col-6 col-md-8">
+                  <!-- <button type="button" class="btn btn-light w-100 border mt-2 text-nowrap">
                     <span class="text-left">Rad</span>
                     <span class="text-center">|</span>
                     <span class="text-right">Deg</span>
-                  </button>
+                  </button> -->
+                  <div class="btn-group w-100 mt-2 btn-light border rounded-3" role="group" aria-label="Calculator mode">
+                    <button type="button" class="btn" id="btn-rad" style="border-right: solid gray;">Rad</button>
+                    <button type="button" class="btn" id="btn-deg">Deg</button>
+                  </div>
                 </div>
                 
                 <div class="col-3 col-md-4">
@@ -257,5 +261,7 @@
     ></script>
 
     <script src="script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
   </body>
 </html>
