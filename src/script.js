@@ -23,16 +23,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
       const tempValue = parseInt(slicedString)
       return tempValue
     }
-    // function calculate(angle) {
-    //   if (!isRadians) {
-
-    //     // Perform calculation with radians
-    //   } else {
-    //     // Convert degrees to radians and perform calculation
-    //     var radians = angle * Math.PI / 180;
-    //     // Perform calculation with radians
-    //   }
-    // }
+    
     function evaluateResult() {
       let replacedValue = ''
       if(currentValue.indexOf('!') !== -1){
@@ -76,8 +67,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
         }
 
-            console.log(isRadians)
-           console.log(valueToBeevaluated)
+            
 
       const result = eval(valueToBeevaluated);
       currentValue = result.toString();
@@ -116,7 +106,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
       const button = buttons[i];
       button.addEventListener("click", function () {
 
-        // try{
+        try{
         if (button.innerText == "AC") {
           currentValue = "";
           display.value = currentValue;
@@ -184,10 +174,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
         }
 
         
-    // } catch(error){
-    //     currentValue = "ERROR"
-    //     display.value = currentValue
-    // } 
+    } catch(error){
+        currentValue = "ERROR"
+        display.value = currentValue
+    } 
       });
     }
   });
