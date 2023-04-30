@@ -42,6 +42,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
         .replaceAll('log', 'Math.log10')
         .replaceAll('ln', 'Math.log')
         .replaceAll('π', 'Math.PI')
+        .replaceAll(/e\^(\d+)/g, "Math.pow(e, $1)")
         .replaceAll('e', 'Math.E')
         .replaceAll('sin-1', 'asin')
         .replaceAll('cos-1', 'acos')
@@ -64,7 +65,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
           .replaceAll(/Math\.acos\((\d+\.\d+)\)/g, "57.3 * Math.acos($1)")
           .replaceAll(/Math\.atan\((\d+\.\d+)\)/g, "57.3 * Math.atan($1)")
           .replaceAll('π', 'Math.PI')
-
         }
 
             
@@ -163,7 +163,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
           currentValue += '^2'
           display.value = currentValue;
         }
-      
+        else if(button.innerText == 'e^x'){
+          currentValue += 'e^'
+          display.value = currentValue;
+        }
         else if(button.innerText == 'Rad' || button.innerText == 'Deg'){
             radDeg()
    
